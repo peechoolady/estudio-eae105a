@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repaso Prueba 3 · Introducción a la Economía (EAE105A)</title>
+<style>
+:root{--navy:#14284b;--blue:#1f4e9c;--gold:#b8892b;--paper:#f6f5f1;--ink:#1c2230;--mute:#5c6577;--line:#d9d6cc;--ok:#1e7a46;--bad:#b0372e;--cost:#7a2a8a;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 Georgia,"Times New Roman",serif}
+header{background:var(--navy);color:#fff;padding:28px 20px 0}
+header h1{margin:0;font-size:1.6rem;font-weight:600}
+header p{margin:4px 0 18px;color:#c9d3e6;font-size:.95rem}
+nav{display:flex;gap:4px;flex-wrap:wrap;max-width:980px;margin:0 auto}
+nav button{font:inherit;font-size:.95rem;padding:10px 16px;border:0;background:transparent;color:#c9d3e6;cursor:pointer;border-bottom:3px solid transparent}
+nav button[aria-selected=true]{color:#fff;border-color:var(--gold)}
+nav button:focus-visible,button:focus-visible,select:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.wrap{max-width:980px;margin:0 auto}
+main{padding:22px 20px 50px}
+section[hidden]{display:none}
+h2{color:var(--navy);margin:0 0 6px;font-size:1.3rem}
+.lead{color:var(--mute);margin:0 0 16px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:6px;padding:16px}
+.grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+svg{width:100%;height:auto;display:block}
+label{display:block;font-weight:bold;font-size:.92rem;margin:12px 0 4px}
+input[type=range]{width:100%;accent-color:var(--blue)}
+select,textarea,input[type=text]{width:100%;font:inherit;padding:8px;border:1px solid var(--line);border-radius:4px;background:#fff}
+textarea{min-height:90px}
+.btn{font:inherit;background:var(--blue);color:#fff;border:0;border-radius:4px;padding:9px 16px;cursor:pointer}
+.btn.alt{background:#fff;color:var(--blue);border:1px solid var(--blue)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+td,th{padding:5px 6px;border-bottom:1px solid var(--line);text-align:left}
+.tag{display:inline-block;padding:2px 8px;border-radius:10px;color:#fff;font-size:.82rem}
+.fb{margin-top:12px;padding:12px;border-left:4px solid var(--blue);background:#eef2fa}
+.fb.ok{border-color:var(--ok);background:#eaf5ee}.fb.bad{border-color:var(--bad);background:#fbeceb}
+.fb ul{margin:6px 0 0 18px;padding:0}
+.card{perspective:900px;height:260px;cursor:pointer;margin:6px 0}
+.card .in{position:relative;width:100%;height:100%;transition:transform .45s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:6px;padding:22px;display:flex;flex-direction:column;justify-content:center;overflow:auto}
+.front{background:var(--navy);color:#fff;font-size:1.2rem}
+.back{background:#fff;border:2px solid var(--gold);transform:rotateY(180deg)}
+.small{font-size:.85rem;color:var(--mute)}
+@media(prefers-reduced-motion:reduce){.card .in{transition:none}}
+.svgtxt{font:12px Arial,sans-serif;fill:var(--ink)}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<h1>Repaso Prueba 3 · Introducción a la Economía</h1>
+<p>Externalidades · Aranceles · Bienes públicos y recursos comunes</p>
+<nav role="tablist" id="tabs">
+<button role="tab" data-t="m1" aria-selected="true">1. Simulador de externalidades</button>
+<button role="tab" data-t="m2" aria-selected="false">2. Práctica tipo prueba</button>
+<button role="tab" data-t="m3" aria-selected="false">3. Flashcards</button>
+</nav></div></header>
+
+<main class="wrap">
+<!-- MÓDULO 1 -->
+<section id="m1">
+<h2>Simulador de externalidades</h2>
+<p class="lead">Mueve el deslizador y observa cómo se separan el equilibrio de mercado (Q₁) y el óptimo social (Q₂).</p>
+<div class="grid">
+<div class="panel"><svg id="g1" viewBox="0 0 520 380" role="img" aria-label="Gráfico de oferta y demanda con externalidad"></svg></div>
+<div class="panel">
+<label for="kind">Dónde ocurre la externalidad</label>
+<select id="kind"><option value="prod">Producción (se desplaza la oferta social)</option><option value="cons">Consumo (se desplaza la demanda / valor social)</option></select>
+<label for="ext">Externalidad por unidad: <span id="extv"></span></label>
+<input type="range" id="ext" min="-40" max="40" step="1" value="20">
+<p class="small">Positivo = costo para terceros (externalidad negativa). Negativo = beneficio para terceros (externalidad positiva).</p>
+<label>Parámetros (D: P = a − bQ; S: P = c + dQ)</label>
+<table><tr><td>a</td><td><input type="text" id="pa" value="100"></td><td>b</td><td><input type="text" id="pb" value="1"></td></tr>
+<tr><td>c</td><td><input type="text" id="pc" value="20"></td><td>d</td><td><input type="text" id="pd" value="1"></td></tr></table>
+<div id="res" style="margin-top:12px"></div>
+</div></div>
+</section>
+
+<!-- MÓDULO 2 -->
+<section id="m2" hidden>
+<h2>Práctica tipo prueba</h2>
+<p class="lead">¿Qué tipo de externalidad describe el gráfico? Justifique y mencione algún ejemplo compatible.</p>
+<div class="grid">
+<div class="panel"><svg id="g2" viewBox="0 0 520 380" role="img" aria-label="Gráfico estático de externalidad"></svg></div>
+<div class="panel">
+<label for="q-type">Tipo de externalidad</label>
+<select id="q-type"><option value="">Elige…</option>
+<option value="prod-neg">Negativa en producción</option><option value="cons-neg">Negativa en consumo</option>
+<option value="prod-pos">Positiva en producción</option><option value="cons-pos">Positiva en consumo</option></select>
+<label for="q-just">Justificación y ejemplo</label>
+<textarea id="q-just" placeholder="Explica qué curva se desplaza, quién recibe el costo o beneficio, qué pasa con Q de mercado vs. Q eficiente, y da un ejemplo."></textarea>
+<div class="row"><button class="btn" id="check">Revisar respuesta</button><button class="btn alt" id="nextq">Otro gráfico</button></div>
+<div id="fb"></div>
+</div></div>
+</section>
+
+<!-- MÓDULO 3 -->
+<section id="m3" hidden>
+<h2>Flashcards: Mankiw cap. 11 y aranceles</h2>
+<p class="lead">Haz clic en la tarjeta para ver la respuesta.</p>
+<div class="panel">
+<div class="card" id="card" tabindex="0" role="button" aria-label="Voltear tarjeta"><div class="in"><div class="face front" id="fq"></div><div class="face back" id="fa"></div></div></div>
+<div class="row"><button class="btn alt" id="prev">Anterior</button><button class="btn" id="next">Siguiente</button><button class="btn alt" id="shuf">Mezclar</button><span class="small" id="cnt" style="align-self:center"></span></div>
+</div>
+</section>
+</main>
+
+<script>
+/* ---------- Matemática ---------- */
+// Demanda: P = a - bQ ; Oferta privada: P = c + dQ ; e = externalidad por unidad (>0 daño, <0 beneficio)
+// Producción: Costo social = c + dQ + e.  Consumo: Valor social = a - bQ - e.
+// En ambos casos el óptimo social cumple: a - bQ = c + dQ + e  =>  Q2 = (a - c - e)/(b + d)
+function equilibria(p){
+  const Q1=(p.a-p.c)/(p.b+p.d), P1=p.a-p.b*Q1;           // mercado: D = S
+  const Q2=(p.a-p.c-p.e)/(p.b+p.d);                      // óptimo social
+  let P2, Pd, Ps;                                        // P2: precio al óptimo; Pd/Ps: precios que ven demanda y oferta privadas
+  if(p.kind==='prod'){ Pd=p.a-p.b*Q2; Ps=p.c+p.d*Q2; P2=Pd; }   // consumidores pagan Pd; costo social = Ps+e = Pd
+  else { Ps=p.c+p.d*Q2; Pd=p.a-p.b*Q2; P2=Ps; }                 // valor social = Pd-e = Ps
+  const pie=0.5*Math.abs(p.e)*Math.abs(Q1-Q2);           // pérdida irrecuperable de eficiencia (triángulo)
+  return {Q1,P1,Q2,P2,pie};
+}
+function intersect(m1,b1,m2,b2){ // y=m1x+b1 ; y=m2x+b2
+  const x=(b2-b1)/(m1-m2); return {x,y:m1*x+b1};
+}
+
+/* ---------- Dibujo SVG ---------- */
+const W=520,H=380,M={l:50,r:20,t:20,b:40};
+function draw(svg,p,opt){
+  opt=opt||{};
+  const qmax=Math.max(p.a/p.b, 120)*0.95, pmax=p.a*1.15;
+  const X=q=>M.l+q/qmax*(W-M.l-M.r), Y=v=>H-M.b-v/pmax*(H-M.t-M.b);
+  const line=(q1,p1,q2,p2,col,w,dash)=>`<line x1="${X(q1)}" y1="${Y(p1)}" x2="${X(q2)}" y2="${Y(p2)}" stroke="${col}" stroke-width="${w||2.5}" ${dash?`stroke-dasharray="${dash}"`:''}/>`;
+  const e=equilibria(p), qE=qmax*0.97;
+  const D=(o)=>line(0,p.a-o,qE,p.a-o-p.b*qE,'#1f4e9c');
+  let s=`<rect width="${W}" height="${H}" fill="#fff"/>`;
+  s+=line(0,0,0,pmax,'#444',1.5)+line(0,0,qmax,0,'#444',1.5);
+  s+=`<text class="svgtxt" x="${M.l-6}" y="${M.t+4}" text-anchor="end">P</text><text class="svgtxt" x="${W-M.r}" y="${H-M.b+28}" text-anchor="end">Q</text>`;
+  // curvas privadas
+  s+=D(0)+`<text class="svgtxt" fill="#1f4e9c" x="${X(qE)-4}" y="${Y(p.a-p.b*qE)-8}" text-anchor="end" style="fill:#1f4e9c">D privada</text>`;
+  s+=line(0,p.c,qE,p.c+p.d*qE,'#1e7a46')+`<text class="svgtxt" style="fill:#1e7a46" x="${X(qE)}" y="${Y(p.c+p.d*qE)-6}" text-anchor="end">S privada</text>`;
+  // curva social
+  if(Math.abs(p.e)>0.01){
+    if(p.kind==='prod'){
+      s+=line(0,p.c+p.e,qE,p.c+p.d*qE+p.e,'#7a2a8a',2.5,'7 4')+`<text class="svgtxt" style="fill:#7a2a8a" x="${X(qE*0.55)}" y="${Y(p.c+p.d*qE*0.55+p.e)-8}">S social (costo social)</text>`;
+    } else {
+      s+=line(0,p.a-p.e,qE,p.a-p.e-p.b*qE,'#c25a00',2.5,'7 4')+`<text class="svgtxt" style="fill:#c25a00" x="${X(qE*0.08)}" y="${Y(p.a-p.e)-8}">D social (valor social)</text>`;
+    }
+  }
+  // puntos y guías
+  const pt=(q,v,lab,col,dx,dy)=>`<line x1="${X(q)}" y1="${Y(v)}" x2="${X(q)}" y2="${Y(0)}" stroke="#888" stroke-dasharray="4 3"/><line x1="${M.l}" y1="${Y(v)}" x2="${X(q)}" y2="${Y(v)}" stroke="#888" stroke-dasharray="4 3"/><circle cx="${X(q)}" cy="${Y(v)}" r="5" fill="${col}"/><text class="svgtxt" x="${X(q)+dx}" y="${Y(v)+dy}" style="font-weight:bold">${lab}</text>`;
+  s+=pt(e.Q1,e.P1,'Mercado ('+e.Q1.toFixed(1)+'; '+e.P1.toFixed(1)+')','#14284b',8,-8);
+  if(Math.abs(p.e)>0.01) s+=pt(e.Q2,e.P2,'Óptimo ('+e.Q2.toFixed(1)+'; '+e.P2.toFixed(1)+')','#b8892b',-8,e.Q2<e.Q1?-10:18).replace('<text','<text text-anchor="end"');
+  s+=`<text class="svgtxt" x="${X(e.Q1)}" y="${H-M.b+16}" text-anchor="middle">Q₁</text>`;
+  if(Math.abs(p.e)>0.01) s+=`<text class="svgtxt" x="${X(e.Q2)}" y="${H-M.b+30}" text-anchor="middle">Q₂</text>`;
+  svg.innerHTML=s;
+  return e;
+}
+
+/* ---------- Módulo 1 ---------- */
+const $=id=>document.getElementById(id);
+function upd1(){
+  const p={a:+$('pa').value||100,b:+$('pb').value||1,c:+$('pc').value||0,d:+$('pd').value||1,e:+$('ext').value,kind:$('kind').value};
+  $('extv').textContent=(p.e>0?'+':'')+p.e+(p.e>0?' (negativa)':p.e<0?' (positiva)':' (sin externalidad)');
+  const e=draw($('g1'),p);
+  const tipo=p.e===0?'Sin externalidad: el mercado es eficiente.':
+    (p.e>0?'Externalidad negativa':'Externalidad positiva')+' en '+(p.kind==='prod'?'producción':'consumo')+': el mercado '+(e.Q1>e.Q2?'produce/consume <b>más</b>':'produce/consume <b>menos</b>')+' que lo socialmente eficiente.';
+  $('res').innerHTML=`<table><tr><td>Q₁ (mercado)</td><td><b>${e.Q1.toFixed(1)}</b></td></tr><tr><td>Q₂ (óptimo social)</td><td><b>${e.Q2.toFixed(1)}</b></td></tr><tr><td>PIE (pérdida social)</td><td><b>${e.pie.toFixed(1)}</b></td></tr><tr><td>Impuesto/subsidio pigouviano</td><td><b>${Math.abs(p.e)}</b> por unidad ${p.e>0?'(impuesto)':p.e<0?'(subsidio)':''}</td></tr></table><p>${tipo}</p>`;
+}
+['ext','kind','pa','pb','pc','pd'].forEach(i=>$(i).addEventListener('input',upd1));
+
+/* ---------- Módulo 2 ---------- */
+const types={
+ 'prod-neg':{kind:'prod',e:25,ex:'fábrica que contamina un río; constructora que genera ruido y polvo',lbl:'Negativa en producción'},
+ 'cons-neg':{kind:'cons',e:25,ex:'fumar en un espacio compartido; música fuerte que molesta a los vecinos',lbl:'Negativa en consumo'},
+ 'prod-pos':{kind:'prod',e:-20,ex:'empresa que invierte en I+D y genera conocimiento útil para otras; el apicultor y la polinización',lbl:'Positiva en producción'},
+ 'cons-pos':{kind:'cons',e:-20,ex:'vacunarse; educación',lbl:'Positiva en consumo'}};
+let cur=null;
+function newQ(){
+  const keys=Object.keys(types).filter(k=>k!==cur);cur=keys[Math.floor(Math.random()*keys.length)];
+  const t=types[cur];draw($('g2'),{a:100,b:1,c:20,d:1,e:t.e,kind:t.kind});
+  $('q-type').value='';$('q-just').value='';$('fb').innerHTML='';
+}
+function has(txt,arr){return arr.some(w=>txt.includes(w));}
+function check(){
+  const t=types[cur],txt=$('q-just').value.toLowerCase(),sel=$('q-type').value,neg=cur.endsWith('neg'),prod=cur.startsWith('prod');
+  const items=[
+   [sel===cur,'Tipo correcto: <b>'+t.lbl+'</b>.'],
+   [has(txt,['tercero','no participan','no participa','otras personas','otros agentes']),'Menciona a los <b>terceros</b> que no participan en la transacción.'],
+   [neg?has(txt,['costo','daño','perjuic']):has(txt,['beneficio','benefici']),'Identifica el '+(neg?'<b>costo</b> externo':'<b>beneficio</b> externo')+'.'],
+   [has(txt,prod?['oferta','costo social','producci']:['demanda','valor social','beneficio social','consumo']),'Indica qué curva difiere de la privada ('+(prod?'oferta / costo social':'demanda / valor social')+').'],
+   [neg?has(txt,['más de lo','mayor que la','excede','sobre']):has(txt,['menos de lo','menor que la','insuficiente','subprod']),'Compara el mercado con lo eficiente: '+(neg?'se produce/consume <b>más</b>':'se produce/consume <b>menos</b>')+' (Q₁ '+(neg?'>':'<')+' Q₂).'],
+   [has(txt,t.ex.split(/[;,]\s*|\s+y\s+/).concat(neg?['contamin','humo','ruido','polvo','tabaco','cigarr']:['vacun','educaci','conocimiento','i+d','polin','investigaci'])),'Da un ejemplo compatible (p. ej. '+t.ex+').']];
+  const n=items.filter(i=>i[0]).length;
+  $('fb').innerHTML=`<div class="fb ${n>=5?'ok':n>=3?'':'bad'}"><b>${n}/6 criterios cumplidos.</b><ul>${items.map(i=>`<li>${i[0]?'✔':'✘'} ${i[1]}</li>`).join('')}</ul>
+  <p class="small">Definición: externalidad negativa = acción de producción o consumo que genera un costo a terceros; positiva = genera un beneficio a terceros (p. ej. vacunarse). Recuerda: la diferencia aparece en la oferta si afecta la producción y en la demanda si afecta el consumo.</p></div>`;
+}
+$('check').onclick=check;$('nextq').onclick=newQ;
+
+/* ---------- Módulo 3 ---------- */
+let cards=[
+["¿Cuándo un bien es excluible y cuándo es rival?","Excluible: se puede impedir que alguien lo use (p. ej., sin pagar). Rival: el uso de una persona reduce el uso disponible para otras."],
+["Los cuatro tipos de bienes según rivalidad y exclusión","Privados (rivales y excluibles: un helado). Públicos (no rivales y no excluibles: defensa nacional). Recursos comunes (rivales, no excluibles: peces en el mar). Monopolios naturales / de club (no rivales, excluibles: TV por cable, carretera no congestionada)."],
+["¿Qué es un bien público y por qué el mercado lo provee mal?","No es rival ni excluible. Aparece el problema del polizón (free rider): nadie quiere pagar si puede usarlo gratis, por lo que el mercado privado lo provee en cantidad insuficiente."],
+["¿Qué es el problema del polizón (free rider)?","Persona que recibe el beneficio de un bien sin pagar por él. Como no se le puede excluir, el proveedor privado no logra cobrar y no produce."],
+["¿Cómo puede ayudar el Estado con los bienes públicos?","Los provee financiándolos con impuestos. Para decidir cuánto, usa el análisis costo-beneficio: se provee si el beneficio social total supera al costo. Dificultad: medir el beneficio, porque la gente no revela su valoración."],
+["¿Qué es un recurso común y la tragedia de los comunes?","Bien rival pero no excluible. Cada usuario ignora el costo que su uso impone a los demás (externalidad negativa) y se sobreutiliza: pesca excesiva, sobrepastoreo, congestión de caminos gratuitos."],
+["Soluciones a la tragedia de los comunes","Regulaciones (cuotas, límites), impuestos pigouvianos, convertirlo en bien privado (derechos de propiedad, licencias transables) o acuerdos privados/comunitarios."],
+["¿Qué es un arancel y cuál es su efecto sobre el precio?","Impuesto sobre bienes importados. El precio interno sube de Pw a Pt = Pw + t; las importaciones caen porque sube la producción nacional y baja el consumo."],
+["Efecto de un arancel sobre los consumidores","Pierden excedente: A₂ + A₄ + A₆ + A₇. Pagan más por lo que siguen comprando (A₂ + A₄ + A₆) y dejan de comprar unidades que valoran sobre Pw (A₇)."],
+["Efecto de un arancel sobre productores y Estado","Productores ganan A₂ (mayor precio y producción). El Estado recauda A₆ = t·(Qᴰᵗ − Qˢᵗ)."],
+["¿Qué es la pérdida irrecuperable de eficiencia (PIE) de un arancel?","A₄ + A₇. A₄: distorsión en la producción (se produce local lo que costaría menos importar). A₇: distorsión en el consumo (transacciones valiosas que dejan de ocurrir)."],
+["Ganancia del comercio para un país exportador o importador","Exportador (Pw > P*): productores ganan A₂+A₄, consumidores pierden A₂; ganancia neta A₄. Importador (Pw < P*): consumidores ganan A₂+A₄, productores pierden A₂; ganancia neta A₄."],
+["Argumentos a favor de restringir el comercio","Protección del empleo, seguridad nacional, competencia desleal (dumping, subsidios), industria naciente y arma de negociación."],
+["¿Qué es un impuesto pigouviano?","Impuesto por unidad igual al costo marginal externo en la cantidad eficiente. Traslada la oferta privada hasta el costo social. Un subsidio pigouviano equivale al beneficio marginal externo (externalidad positiva)."],
+["Teorema de Coase: condiciones y resultado","Con derechos de propiedad bien definidos y costos de negociación bajos, las partes alcanzan el resultado eficiente sin importar quién tenga el derecho inicial; solo cambia quién paga."]];
+let ci=0;
+function show(){const c=cards[ci];$('fq').textContent=c[0];$('fa').textContent=c[1];$('card').classList.remove('flip');$('cnt').textContent=(ci+1)+' / '+cards.length;}
+$('card').onclick=()=>$('card').classList.toggle('flip');
+$('card').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();$('card').classList.toggle('flip');}};
+$('next').onclick=()=>{ci=(ci+1)%cards.length;show();};
+$('prev').onclick=()=>{ci=(ci-1+cards.length)%cards.length;show();};
+$('shuf').onclick=()=>{cards.sort(()=>Math.random()-.5);ci=0;show();};
+
+/* ---------- Pestañas ---------- */
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#tabs button').forEach(x=>x.setAttribute('aria-selected',x===b));
+  ['m1','m2','m3'].forEach(id=>$(id).hidden=id!==b.dataset.t);
+});
+upd1();newQ();show();
+</script>
+</body>
+</html>
